@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppareilService} from '../services/appareil.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-appareil-view',
@@ -21,6 +22,7 @@ export class AppareilViewComponent implements OnInit {
   );
 
   appareils: any [];
+  appareilSubscription: Subscription;
 
   constructor( private appareilService: AppareilService) {
     setTimeout(
@@ -32,7 +34,12 @@ export class AppareilViewComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.appareils = this.appareilService.appareils;
+    this.appareilSubscription = this.appareilService.appareilSubject.subscribe(
+      (appareils: any[] ) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppreilSubject();
   }
 
   // tslint:disable-next-line:typedef
