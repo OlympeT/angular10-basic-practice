@@ -2,7 +2,7 @@
   <h2>Mes appareils</h2>
   <p>Mis à jour {{ lastUpdate | async | date: 'short'}}</p>
   <ul class="list-group">
-    <app-appareil *ngFor=" let appareil of appareils; let i = index"
+    <app-appareil *ngFor=" let appareil of appareils; let i = index;"
                   [indexOfAppareil]="i"
                   [appareilName]="appareil.name"
                   [appareilStatus]="appareil.status"
